@@ -135,6 +135,26 @@ export default function(ctx) {
       });
     }
 
+    if (controls[Constants.types.CIRCLE]) {
+      buttonElements[Constants.types.POINT] = createControlButton(Constants.types.CIRCLE, {
+        container: controlGroup,
+        className: Constants.classes.CONTROL_BUTTON_CIRCLE,
+        title: `Marker tool ${ctx.options.keybindings ? '(m)' : ''}`,
+        onActivate: () => ctx.events.changeMode(Constants.modes.DRAW_CIRCLE),
+        onDeactivate: () => ctx.events.trash()
+      });
+    }
+
+    if (controls[Constants.types.RECTANGLE]) {
+      buttonElements[Constants.types.POINT] = createControlButton(Constants.types.RECTANGLE, {
+        container: controlGroup,
+        className: Constants.classes.CONTROL_BUTTON_RECTANGLE,
+        title: `Marker tool ${ctx.options.keybindings ? '(m)' : ''}`,
+        onActivate: () => ctx.events.changeMode(Constants.modes.DRAW_RECTANGLE),
+        onDeactivate: () => ctx.events.trash()
+      });
+    }
+
     if (controls.trash) {
       buttonElements.trash = createControlButton('trash', {
         container: controlGroup,

@@ -11,10 +11,11 @@ import * as Constants from '../constants';
  * @param {boolean} selected
  * @return {GeoJSON} Point
  */
-export default function(parentId, coordinates, path, selected) {
+export default function(parentId, coordinates, path, selected, properties = {}) {
   return {
     type: Constants.geojsonTypes.FEATURE,
     properties: {
+      ...properties,
       meta: Constants.meta.VERTEX,
       parent: parentId,
       coord_path: path,

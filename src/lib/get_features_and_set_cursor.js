@@ -6,8 +6,13 @@ export default function getFeatureAtAndSetCursors(event, ctx) {
   const classes = { mouse: Constants.cursors.NONE };
 
   if (features[0]) {
-    classes.mouse = (features[0].properties.active === Constants.activeStates.ACTIVE) ?
-      Constants.cursors.MOVE : Constants.cursors.POINTER;
+    if (features[0].properties.active === Constants.activeStates.ACTIVE) {
+      classes.mouse = Constants.cursors.MOVE
+    } else {
+      if (features[0].properties.disabled === false) {
+        classes.mouse = Constants.cursors.POINTER
+      }
+    }
     classes.feature = features[0].properties.meta;
   }
 

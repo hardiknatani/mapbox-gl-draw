@@ -1,9 +1,9 @@
 {
-  "name": "@mapbox/mapbox-gl-draw",
-  "version": "1.4.3",
+  "name": "@hardiknatani/mapbox-gl-draw",
+  "version": "1.4.3-fork",
   "description": "A drawing component for Mapbox GL JS",
-  "homepage": "https://github.com/mapbox/mapbox-gl-draw",
-  "author": "mapbox",
+  "homepage": "https://github.com/hardiknatani/mapbox-gl-draw",
+  "author": "hardiknatani",
   "license": "ISC",
   "main": "dist/mapbox-gl-draw.js",
   "browser": "dist/mapbox-gl-draw.js",
@@ -23,14 +23,7 @@
     "watch": "rollup -c --watch",
     "watch-bench": "rollup -c bench/rollup.config.js --watch",
     "start-server": "st --no-cache -H 0.0.0.0 --port 9967 --index index.html .",
-    "start": "run-p build-token watch watch-bench start-server"
-  },
-  "files": [
-    "dist/mapbox-gl-draw*"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mapbox/mapbox-gl-draw.git"
+    "start": "run-p watch watch-bench start-server"
   },
   "keywords": [
     "webgl",
@@ -38,9 +31,6 @@
     "draw",
     "drawing"
   ],
-  "bugs": {
-    "url": "https://github.com/mapbox/mapbox-gl-draw/issues"
-  },
   "nyc": {
     "sourceMap": false,
     "instrument": false
@@ -79,6 +69,12 @@
     "@mapbox/geojson-extent": "^1.0.1",
     "@mapbox/geojson-normalize": "^0.0.1",
     "@mapbox/point-geometry": "^0.1.0",
+    "@turf/turf": "^6.5.0",
+    "@types/geojson": "^7946.0.10",
+    "@types/mapbox-gl": "^2.7.8",
+    "@types/mapbox__mapbox-gl-draw": "^1.3.3",
+    "arc": "^0.1.4",
+    "geodesy-fn": "^1.0.1",
     "hat": "0.0.3",
     "lodash.isequal": "^4.5.0",
     "xtend": "^4.0.2"

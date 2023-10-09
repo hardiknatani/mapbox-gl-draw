@@ -4,7 +4,6 @@ import * as Constants from '../constants';
 const FEATURE_SORT_RANKS = {
   Point: 0,
   LineString: 1,
-  MultiLineString: 1,
   Polygon: 2
 };
 

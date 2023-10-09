@@ -9,6 +9,8 @@ export default function(ctx) {
   let controlContainer = null;
   let mapLoadedInterval = null;
 
+  const iconPrefix = "mapbox-gl-draw-";
+
   const setup = {
     onRemove() {
       // Stop connect attempt in the event that control is removed before map is loaded
@@ -16,11 +18,11 @@ export default function(ctx) {
       clearInterval(mapLoadedInterval);
 
       setup.removeLayers();
+      setup.removeIcons();
       ctx.store.restoreMapConfig();
       ctx.ui.removeButtons();
       ctx.events.removeEventListeners();
       ctx.ui.clearMapClasses();
-      if (ctx.boxZoomInitial) ctx.map.boxZoom.enable();
       ctx.map = null;
       ctx.container = null;
       ctx.store = null;
@@ -34,11 +36,12 @@ export default function(ctx) {
       ctx.map.off('load', setup.connect);
       clearInterval(mapLoadedInterval);
       setup.addLayers();
+      // setup.addIcons();
       ctx.store.storeMapConfig();
       ctx.events.addEventListeners();
     },
     onAdd(map) {
-      if (process.env.NODE_ENV !== 'test') {
+      if (ctx.options.debug) {
         // Monkey patch to resolve breaking change to `fire` introduced by
         // mapbox-gl-js. See mapbox/mapbox-gl-draw/issues/766.
         const _fire = map.fire;
@@ -64,7 +67,6 @@ export default function(ctx) {
       controlContainer = ctx.ui.addButtons();
 
       if (ctx.options.boxSelect) {
-        ctx.boxZoomInitial = map.boxZoom.isEnabled();
         map.boxZoom.disable();
         // Need to toggle dragPan on and off or else first
         // dragPan disable attempt in simple_select doesn't work
@@ -80,6 +82,7 @@ export default function(ctx) {
       }
 
       ctx.events.start();
+      ctx.options.debug && console.log(ctx);
       return controlContainer;
     },
     addLayers() {
@@ -124,6 +127,21 @@ export default function(ctx) {
       if (ctx.map.getSource(Constants.sources.HOT)) {
         ctx.map.removeSource(Constants.sources.HOT);
       }
+    },
+    // 添加icon
+    addIcons () {
+      Object.keys(ctx.options.icons).forEach((iconName) => {
+        const icon = ctx.options.icons[iconName];
+        ctx.map.loadImage(icon.url, (error, image) => {
+          if (!error && !ctx.map.hasImage(`${iconPrefix}${iconName}`)) ctx.map.addImage(`${iconPrefix}${iconName}`, image, icon.options);
+        });
+      });
+    },
+    // 移除icon
+    removeIcons () {
+      Object.keys(ctx.options.icons).forEach((iconName) => {
+        if (ctx.map.hasImage(`${iconPrefix}${iconName}`)) ctx.map.removeImage(`${iconPrefix}${iconName}`);
+      });
     }
   };
 

@@ -4,6 +4,8 @@ export const classes = {
   CONTROL_BUTTON: 'mapbox-gl-draw_ctrl-draw-btn',
   CONTROL_BUTTON_LINE: 'mapbox-gl-draw_line',
   CONTROL_BUTTON_POLYGON: 'mapbox-gl-draw_polygon',
+  CONTROL_BUTTON_CIRCLE: 'mapbox-gl-draw_circle',
+  CONTROL_BUTTON_RECTANGLE: 'mapbox-gl-draw_rectangle',
   CONTROL_BUTTON_POINT: 'mapbox-gl-draw_point',
   CONTROL_BUTTON_TRASH: 'mapbox-gl-draw_trash',
   CONTROL_BUTTON_COMBINE_FEATURES: 'mapbox-gl-draw_combine',
@@ -12,6 +14,19 @@ export const classes = {
   ATTRIBUTION: 'mapboxgl-ctrl-attrib',
   ACTIVE_BUTTON: 'active',
   BOX_SELECT: 'mapbox-gl-draw_boxselect'
+};
+
+export const properties = {
+  RADIUS: 'radius',
+  CENTER: 'center',
+  BEARING: 'bearing',
+  BEARING1: 'bearing1',
+  BEARING2: 'bearing2',
+  UNITS: 'units',
+  STEPS: 'steps',
+  POINT1: 'p1',
+  POINT2: 'p2',
+  DISABLED: "disabled"
 };
 
 export const sources = {
@@ -30,7 +45,10 @@ export const cursors = {
 export const types = {
   POLYGON: 'polygon',
   LINE: 'line_string',
-  POINT: 'point'
+  POINT: 'point',
+  CIRCLE: 'circle',
+  SECTOR: 'sector',
+  RECTANGLE:'rectangle'
 };
 
 export const geojsonTypes = {
@@ -49,9 +67,15 @@ export const modes = {
   DRAW_LINE_STRING: 'draw_line_string',
   DRAW_POLYGON: 'draw_polygon',
   DRAW_POINT: 'draw_point',
+  DRAW_CUSTOM_POINT: 'draw_custom_point',
+  DRAW_TEXT: 'draw_text',
   SIMPLE_SELECT: 'simple_select',
   DIRECT_SELECT: 'direct_select',
-  STATIC: 'static'
+  STATIC: 'static',
+  DRAW_CIRCLE: 'draw_circle',
+  DRAW_SECTOR: 'draw_sector',
+  DRAW_RECTANGLE: 'draw_rectangle',
+  DRAW_ARROW: 'draw_arrow',
 };
 
 export const events = {
@@ -74,7 +98,8 @@ export const updateActions = {
 export const meta = {
   FEATURE: 'feature',
   MIDPOINT: 'midpoint',
-  VERTEX: 'vertex'
+  VERTEX: 'vertex',
+  ARROW: 'arrow'
 };
 
 export const activeStates = {
